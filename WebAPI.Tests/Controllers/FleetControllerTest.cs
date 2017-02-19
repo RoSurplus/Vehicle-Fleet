@@ -2,7 +2,7 @@
 using API.Library.APIServices;
 using Moq;
 using NUnit.Framework;
-using WebAPI.Controllers;
+using SampleApp.Controllers;
 using System.Web.Mvc;
 using API.Library.APIWrappers;
 using API.Library.APIMappers;
@@ -10,7 +10,7 @@ using API.Library.APIResources;
 using System;
 //using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace WebAPI.Tests.Controllers
+namespace SampleApp.Tests.Controllers
 {
     [TestFixture]
     public class FleetControllerTest
@@ -72,49 +72,88 @@ namespace WebAPI.Tests.Controllers
         }
 
         [Test]
-        public void Index()
+        public void Get()
         {
-            // Create return models for dependencies
-            const string DataFilePath = "some/path";
-            const string FileContents = "";
-
             // Setup mocked dependencies
             this.dataServiceMock = new Mock<IDataService>();
+
+            // Arrange
+            controller = new FleetController(this.dataServiceMock.Object);
+
+            // Create the expected result
+            var expectedResult = GetSampleHW_Message();
 
             // Set up dependencies
-            this.appSettingsMock.Setup(m => m.Get(AppSettingsKeys.Fleet_File)).Returns(DataFilePath);
-            this.fileIOServiceMock.Setup(m => m.ReadFile(DataFilePath)).Returns(FileContents);
+            this.dataServiceMock.Setup(m => m.GetHW_Message()).Returns(expectedResult);
 
-            // Arrange
-            controller = new FleetController();
+            // Call the method to test
+            var result = this.controller.Get();
 
-            // Act
-            ViewResult result = controller.Index() as ViewResult;
-
-            // Assert
-            Assert.IsNotNull(result);
-            string title = result.ViewBag.Title;
-            Assert.AreEqual("Fleet Page", result.ViewBag.Title);
+            // Check values
+            Assert.NotNull(result);
+            Assert.AreEqual(result.Data, expectedResult.Data);
         }
 
-        [Test]
-        public void TestSerialationStability()
+        /***
+                [Test]
+                public void Index()
+                {
+                    // Create return models for dependencies
+                    const string DataFilePath = "some/path";
+                    const string FileContents = "";
+
+                    // Setup mocked dependencies
+                    this.dataServiceMock = new Mock<IDataService>();
+
+                    // Set up dependencies
+                    this.appSettingsMock.Setup(m => m.Get(AppSettingsKeys.Fleet_File)).Returns(DataFilePath);
+                    this.fileIOServiceMock.Setup(m => m.ReadFile(DataFilePath)).Returns(FileContents);
+
+                    // Arrange
+                    controller = new FleetController(this.dataServiceMock.Object);
+
+                    // Act
+                    ViewResult result = controller.Index() as ViewResult;
+
+                    // Assert
+                    Assert.IsNotNull(result);
+                    string title = result.ViewBag.Title;
+                    Assert.AreEqual("Fleet Page", result.ViewBag.Title);
+                }
+
+                [Test]
+                public void TestSerialationStability()
+                {
+                    // Setup mocked dependencies
+                    this.dataServiceMock = new Mock<IDataService>();
+
+                    // Arrange
+                    controller = new FleetController(this.dataServiceMock.Object);
+
+                    // Act
+                    controller.Load_Fleet_File();
+                    int origchksum = controller.CheckSum();
+                    controller.Save_Fleet_File();
+                    controller.Load_Fleet_File();
+                    int newchksum = controller.CheckSum();
+
+                    // Assert
+                    Assert.AreEqual(origchksum, newchksum);
+                }
+                ****/
+
+        #region Helper Methods
+        /// <summary>
+        ///     Gets a sample HW_Message model
+        /// </summary>
+        /// <returns>A sample HW_Message model</returns>
+        private static HW_Message GetSampleHW_Message()
         {
-            // Setup mocked dependencies
-            this.dataServiceMock = new Mock<IDataService>();
-
-            // Arrange
-            controller = new FleetController();
-
-            // Act
-            controller.Load_Fleet_File();
-            int origchksum = controller.CheckSum();
-            controller.Save_Fleet_File();
-            controller.Load_Fleet_File();
-            int newchksum = controller.CheckSum();
-
-            // Assert
-            Assert.AreEqual(origchksum, newchksum);
+            return new HW_Message()
+            {
+                Data = "Hello There5, World!"
+            };
         }
+        #endregion
     }
 }

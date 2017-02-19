@@ -381,6 +381,26 @@ namespace API.Library.APIServices
 
             return hw_Message;
         }
+
+        public String Load_Fleet_File()
+        {
+            var filePath = ConfigurationManager.AppSettings.Get(AppSettingsKeys.Fleet_File);
+            var iFileIO = new TextFileIOService(new ServerHostingEnvironmentService());
+            String text = iFileIO.ReadFile(filePath);
+
+            return text;
+        }
+
+        //public void Save_Fleet_File()
+        //{
+        //    if (session_fleet_file_invalid)
+        //    {
+        //        var filePath = ConfigurationManager.AppSettings.Get(AppSettingsKeys.Fleet_File);
+
+        //        var iFileIO = new TextFileIOService(new ServerHostingEnvironmentService());
+        //        iFileIO.WriteFile(filePath, Common.ToXML(session_fleet));
+        //    }
+        //}
     }
 }
 

@@ -10,7 +10,7 @@ using API.Library.APIMappers;
 using API.Library.APIServices;
 using LightInject;
 
-namespace WebAPI
+namespace SampleApp
 {
     /// <summary>
     /// Configures dependency injection via LightInject

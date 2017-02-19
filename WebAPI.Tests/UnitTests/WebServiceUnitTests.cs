@@ -5,7 +5,7 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-namespace WebAPI.Tests.UnitTests
+namespace SampleApp.Tests.UnitTests
 {
     using System;
     using System.Collections.Generic;

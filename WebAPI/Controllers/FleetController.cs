@@ -1,7 +1,15 @@
-﻿using API.Library.APIResources;
+﻿//-----------------------------------------------------------------------
+// <copyright file="SampleAppController.cs" company="Kenneth Larimer">
+//  Copyright (c) 2017 All Rights Reserved
+//  <author>Kenneth Larimer</author>
+// </copyright>
+//-----------------------------------------------------------------------
+
+using API.Library.APIResources;
 using API.Library.APIServices;
 using API.Library.Common;
-using WebAPI.Models;
+using API.Library.APIModels;
+using SampleApp.Models;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -14,11 +22,43 @@ using System.Xml.Linq;
 using System.Xml.Serialization;
 using System.Xml;
 using System.Net;
+using API.Library.APIAttributes;
 
-namespace WebAPI.Controllers
+namespace SampleApp.Controllers
 {
     public class FleetController : Controller
     {
+        /// <summary>
+        ///     The data service
+        /// </summary>
+        private readonly IDataService dataService;
+
+        public FleetController()
+        {
+            this.dataService = null;
+        }
+
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="SampleAppController" /> class.
+        /// </summary>
+        /// <param name="dataService">The injected data service</param>
+//        public HW_MessageController(IDataService dataService)
+        public FleetController(IDataService dataService)
+        {
+            this.dataService = dataService;
+        }
+
+        /// <summary>
+        ///     Gets HW_Message value
+        /// </summary>
+        /// <returns>A HW_Message model containing HW_Message value</returns>
+        [WebApiExceptionFilter(Type = typeof(IOException), Status = HttpStatusCode.ServiceUnavailable, Severity = SeverityCode.Error)]
+        [WebApiExceptionFilter(Type = typeof(SettingsPropertyNotFoundException), Status = HttpStatusCode.ServiceUnavailable, Severity = SeverityCode.Error)]
+        public HW_Message Get()
+        {
+            return this.dataService.GetHW_Message();
+        }
+
         public static Fleet session_fleet = new Fleet();
         static bool session_fleet_file_invalid = false;
 
@@ -53,15 +93,17 @@ namespace WebAPI.Controllers
                 "pwertpwert01234567890123", "North", "", v_status.INSERVICE));
         }
 
+        [WebApiExceptionFilter(Type = typeof(IOException), Status = HttpStatusCode.ServiceUnavailable, Severity = SeverityCode.Error)]
+        [WebApiExceptionFilter(Type = typeof(SettingsPropertyNotFoundException), Status = HttpStatusCode.ServiceUnavailable, Severity = SeverityCode.Error)]
         public void Load_Fleet_File()
         {
             session_fleet_file_invalid = false;
+//            HW_Message message =  this.dataService.GetHW_Message();
 
+            //            String text = this.WebService.Load_Fleet_File();
             var filePath = ConfigurationManager.AppSettings.Get(AppSettingsKeys.Fleet_File);
             var iFileIO = new TextFileIOService(new ServerHostingEnvironmentService());
             String text = iFileIO.ReadFile(filePath);
-
-            session_fleet_file_invalid = false;
 
             session_fleet = Common.FromXml<Fleet>(text);
             session_fleet.fix_NextID();
@@ -86,7 +128,22 @@ namespace WebAPI.Controllers
         // GET: Fleet
         public ActionResult Index()
         {
-            ViewBag.Title = "Fleet Page";
+        //            /// <summary>
+        //            ///     The Web Service
+        //            /// </summary>
+        //private readonly IHW_WebService WebService;
+
+        ///// <summary>
+        /////     The logger
+        ///// </summary>
+        //private readonly ILogger logger;
+
+        //ViewBag.Title = "Fleet Page";
+        //    this.WebService = WebService;
+        //    this.logger = logger;
+
+        //    //Get HW Message
+        //    var hw_Message = this.WebService.GetHW_Message();
 
             Load_Fleet_File();
 

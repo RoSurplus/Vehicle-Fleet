@@ -10,7 +10,7 @@ using System.Web;
 using System.Text.RegularExpressions;
 using System.ComponentModel;
 
-namespace WebAPI.Models
+namespace SampleApp.Models
 {
     public class Fleet
     {

@@ -1,11 +1,11 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="TodaysDataControllerUnitTests.cs" company="Ryan Woodcox">
-//  Copyright (c) 2015 All Rights Reserved
-//  <author>Ryan Woodcox</author>
+// <copyright file="TodaysDataControllerUnitTests.cs" company="Kenneth Larimer">
+//  Copyright (c) 2017 All Rights Reserved
+//  <author>Kenneth Larimer</author>
 // </copyright>
 //-----------------------------------------------------------------------
 
-namespace WebAPI.Tests.UnitTests
+namespace SampleApp.Tests.UnitTests
 {
     using System.Configuration;
     using System.IO;
@@ -14,7 +14,7 @@ namespace WebAPI.Tests.UnitTests
     using API.Library.APIServices;
     using Moq;
     using NUnit.Framework;
-    using WebAPI.Controllers;
+    using SampleApp.Controllers;
 
     /// <summary>
     ///     Unit tests for the HW_Message's Data Controller

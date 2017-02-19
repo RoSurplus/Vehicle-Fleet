@@ -1,8 +1,8 @@
 ﻿using System.Web.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using WebAPI.Controllers;
+using SampleApp.Controllers;
 
-namespace WebAPI.Tests.Controllers
+namespace SampleApp.Tests.Controllers
 {
     [TestClass]
     public class HomeControllerTest

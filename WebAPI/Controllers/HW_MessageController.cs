@@ -5,7 +5,7 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-namespace WebAPI.Controllers
+namespace SampleApp.Controllers
 {
     using System.Configuration;
     using System.IO;

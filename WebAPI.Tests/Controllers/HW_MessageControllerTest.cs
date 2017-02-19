@@ -2,9 +2,9 @@
 using API.Library.APIServices;
 using Moq;
 using NUnit.Framework;
-using WebAPI.Controllers;
+using SampleApp.Controllers;
 
-namespace WebAPI.Tests.Controllers
+namespace SampleApp.Tests.Controllers
 {
     [TestFixture]
     public class HW_MessageControllerTest

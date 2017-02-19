@@ -62,3 +62,7 @@ Temporary Items
 /WebAPI/obj/Debug/Fleet.csprojResolveAssemblyReference.cache
 /WebAPI/obj/Debug/Fleet.csproj.FileListAbsolute.txt
 /WebAPI.Tests/obj/Debug/build.force
+/ConsoleApp/obj/Debug
+/ConsoleApp/bin/Debug
+/WebAPI.Tests/bin/Debug
+/WebAPI.Tests/obj/Debug

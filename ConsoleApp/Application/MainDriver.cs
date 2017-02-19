@@ -1,7 +1,7 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="MainDriver.cs" company="Ryan Woodcox">
-//  Copyright (c) 2015 All Rights Reserved
-//  <author>Ryan Woodcox</author>
+// <copyright file="MainDriver.cs" company="Kenneth Larimer">
+//  Copyright (c) 2017 All Rights Reserved
+//  <author>Kenneth Larimer</author>
 // </copyright>
 //-----------------------------------------------------------------------
 

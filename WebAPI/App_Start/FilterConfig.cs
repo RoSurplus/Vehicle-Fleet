@@ -7,7 +7,7 @@
 using System.Web;
 using System.Web.Mvc;
 
-namespace WebAPI
+namespace SampleApp
 {
     public class FilterConfig
     {

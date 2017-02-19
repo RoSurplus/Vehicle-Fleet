@@ -1,11 +1,11 @@
 ﻿//-----------------------------------------------------------------------
 // <copyright file="WebApiConfig.cs">
 //  Copyright (c) 2015 All Rights Reserved
-//  <author>Ryan Woodcox</author>
+//  <author>Kenneth Larimer</author>
 // </copyright>
 //-----------------------------------------------------------------------
 
-namespace WebAPI
+namespace SampleApp
 {
     using System.Web.Http;
 

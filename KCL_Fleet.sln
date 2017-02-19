@@ -1,0 +1,70 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fleet", "WebAPI\Fleet.csproj", "{8270C6E6-1E91-490E-975D-63DFC8FE9B9E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fleet.Tests", "WebAPI.Tests\Fleet.Tests.csproj", "{54FD9AC3-15CE-435B-89F2-5EBAC267BA3B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API.Library", "API.Library\API.Library.csproj", "{6C581652-8D19-4375-876E-851E6CC490EA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp", "ConsoleApp\ConsoleApp.csproj", "{0D47C66E-AA53-41B0-BBF3-D739F2D3ED84}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{6835B048-D78E-4928-A9E1-4EB6FCEEEF50}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8270C6E6-1E91-490E-975D-63DFC8FE9B9E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8270C6E6-1E91-490E-975D-63DFC8FE9B9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8270C6E6-1E91-490E-975D-63DFC8FE9B9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8270C6E6-1E91-490E-975D-63DFC8FE9B9E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54FD9AC3-15CE-435B-89F2-5EBAC267BA3B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54FD9AC3-15CE-435B-89F2-5EBAC267BA3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54FD9AC3-15CE-435B-89F2-5EBAC267BA3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54FD9AC3-15CE-435B-89F2-5EBAC267BA3B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C581652-8D19-4375-876E-851E6CC490EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C581652-8D19-4375-876E-851E6CC490EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C581652-8D19-4375-876E-851E6CC490EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C581652-8D19-4375-876E-851E6CC490EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D47C66E-AA53-41B0-BBF3-D739F2D3ED84}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D47C66E-AA53-41B0-BBF3-D739F2D3ED84}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D47C66E-AA53-41B0-BBF3-D739F2D3ED84}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D47C66E-AA53-41B0-BBF3-D739F2D3ED84}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 4
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://cascaids.visualstudio.com/
+		SccProjectUniqueName0 = API.Library\\API.Library.csproj
+		SccProjectName0 = API.Library
+		SccAuxPath0 = https://cascaids.visualstudio.com
+		SccLocalPath0 = API.Library
+		SccProvider0 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccProjectUniqueName1 = ConsoleApp\\ConsoleApp.csproj
+		SccProjectName1 = ConsoleApp
+		SccAuxPath1 = https://cascaids.visualstudio.com
+		SccLocalPath1 = ConsoleApp
+		SccProvider1 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccProjectUniqueName2 = WebAPI\\Fleet.csproj
+		SccProjectName2 = WebAPI
+		SccAuxPath2 = https://cascaids.visualstudio.com
+		SccLocalPath2 = WebAPI
+		SccProvider2 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccProjectUniqueName3 = WebAPI.Tests\\Fleet.Tests.csproj
+		SccProjectName3 = WebAPI.Tests
+		SccAuxPath3 = https://cascaids.visualstudio.com
+		SccLocalPath3 = WebAPI.Tests
+		SccProvider3 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+	EndGlobalSection
+EndGlobal

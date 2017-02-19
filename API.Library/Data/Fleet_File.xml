@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Fleet xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <FleetList>
+    <Vehicle>
+      <id>1</id>
+      <VMake>Mercury</VMake>
+      <VModel>Cougar</VModel>
+      <VYear>1967</VYear>
+      <VVIN>qwertqwert01234567890123</VVIN>
+      <VStatus xsi:nil="true" />
+      <VType>CAR</VType>
+    </Vehicle>
+    <Vehicle>
+      <id>2</id>
+      <VMake>GM</VMake>
+      <VModel>G20</VModel>
+      <VYear>1971</VYear>
+      <VVIN>kwertkwert01234567890123</VVIN>
+      <VStatus xsi:nil="true" />
+      <VType>VAN</VType>
+    </Vehicle>
+    <Vehicle>
+      <id>3</id>
+      <VMake>Chevy</VMake>
+      <VModel>S150</VModel>
+      <VYear>1988</VYear>
+      <VVIN>dwertdwert01234567890123</VVIN>
+      <VStatus xsi:nil="true" />
+      <VType>TRUCK</VType>
+    </Vehicle>
+    <Vehicle>
+      <id>4</id>
+      <VMake>Peterbilt</VMake>
+      <VModel>Semi</VModel>
+      <VYear>1994</VYear>
+      <VVIN>twerttwert01234567890123</VVIN>
+      <VStatus xsi:nil="true" />
+      <VType>SEMI</VType>
+    </Vehicle>
+    <Vehicle>
+      <id>5</id>
+      <VMake>Vox</VMake>
+      <VModel>Trailer</VModel>
+      <VYear>2011</VYear>
+      <VVIN>pwertpwert01234567890123</VVIN>
+      <VStatus xsi:nil="true" />
+      <VType>TRAILER</VType>
+    </Vehicle>
+    <Vehicle>
+      <id>6</id>
+      <VMake>Toyota</VMake>
+      <VModel>Prius</VModel>
+      <VYear>1999</VYear>
+      <VVIN>fdfad54333dfasd334561111</VVIN>
+      <VStatus xsi:nil="true" />
+      <VType>CAR</VType>
+    </Vehicle>
+    <Vehicle>
+      <id>8</id>
+      <VMake>Ford</VMake>
+      <VModel>Fusion</VModel>
+      <VYear>2013</VYear>
+      <VVIN>rrfdg45332yrtrg123453333</VVIN>
+      <VStatus xsi:nil="true" />
+      <VType>CAR</VType>
+    </Vehicle>
+    <Vehicle>
+      <id>9</id>
+      <VMake>Volkwagon</VMake>
+      <VModel>Beetle</VModel>
+      <VYear>1991</VYear>
+      <VVIN>rrfdg45332yrtxg123453333</VVIN>
+      <VStatus xsi:nil="true" />
+      <VType>CAR</VType>
+    </Vehicle>
+    <Vehicle>
+      <id>10</id>
+      <VMake>Chevy</VMake>
+      <VModel>Van</VModel>
+      <VYear>2013</VYear>
+      <VVIN>asdfd11111dfdfd444442222</VVIN>
+      <VStatus>STANDBY</VStatus>
+      <VRegion>North</VRegion>
+      <VLocation>Branch 6</VLocation>
+      <VType>VAN</VType>
+    </Vehicle>
+  </FleetList>
+</Fleet>

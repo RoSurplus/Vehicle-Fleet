@@ -1,0 +1,118 @@
+﻿@model WebAPI.Models.Vehicle
+
+@using (Html.BeginForm("Create", "Fleet", FormMethod.Post))
+{
+    <input type="hidden" name="V_Make" id="hdnV_Make" value="@Model.VMake" />
+    <input type="hidden" name="V_Model" id="hdnV_Model" value="@Model.VModel" />
+    <input type="hidden" name="V_Type" id="hdnV_Type" value="@Model.VType" />
+    <input type="hidden" name="V_VIN" id="hdnV_VIN" value="@Model.VVIN" />
+    <input type="hidden" name="V_Year" id="hdnV_Year" value="@Model.VYear" />
+    <input type="hidden" name="V_Region" id="hdnV_Region" value="@Model.VRegion" />
+    <input type="hidden" name="V_Location" id="hdnV_Location" value="@Model.VLocation" />
+    <input type="hidden" name="V_Status" id="hdnV_Status" value="@Model.VStatus" />
+
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal" style="width: 75%; margin-left: 12.5%;">
+        <br />
+        <h2>Create</h2>
+        <h4>Vehicle</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+        <dl class="dl-horizontal">
+            <dt style="padding-bottom:8px;">
+                @Html.LabelFor(model => model.VMake, new { @class = "control-label col-md-2", @style = "text-align: left;" })
+            </dt>
+            <dd style="padding-top:8px;">
+                @Html.EditorFor(model => model.VMake)
+                @Html.ValidationMessageFor(model => model.VMake)
+            </dd>
+        </dl>
+        <dl class="dl-horizontal">
+            <dt style="padding-bottom:8px;">
+                @Html.LabelFor(model => model.VModel, new { @class = "control-label col-md-2", @style = "text-align: left;" })
+            </dt>
+            <dd style="padding-top:8px;">
+                @Html.EditorFor(model => model.VModel)
+                @Html.ValidationMessageFor(model => model.VModel)
+            </dd>
+        </dl>
+        <dl class="dl-horizontal">
+            <dt style="padding-bottom:8px;">
+                @Html.LabelFor(model => model.VVIN, new { @class = "control-label col-md-2", @style = " text-align: left;" })
+            </dt>
+            <dd style="padding-top:8px;">
+                @Html.EditorFor(model => model.VVIN, new { htmlAttributes = new { style = "width: 300px" }, })
+                @Html.ValidationMessageFor(model => model.VVIN)
+            </dd>
+        </dl>
+        <dl class="dl-horizontal">
+            <dt style="padding-bottom:8px;">
+                @Html.LabelFor(model => model.VYear, new { @class = "control-label col-md-2", @style = "text-align: left;" })
+            </dt>
+            <dd style="padding-top:8px;">
+                @Html.EditorFor(model => model.VYear)
+                @Html.ValidationMessageFor(model => model.VYear)
+            </dd>
+        </dl>
+        <dl class="dl-horizontal">
+            <dt style="padding-bottom:8px;">
+                @Html.LabelFor(model => model.VRegion, new { @class = "control-label col-md-2", @style = "text-align: left;" })
+            </dt>
+            <dd style="padding-top:8px;">
+                @Html.EditorFor(model => model.VRegion)
+                @Html.ValidationMessageFor(model => model.VRegion)
+            </dd>
+        </dl>
+        <dl class="dl-horizontal">
+            <dt style="padding-bottom:8px;">
+                @Html.LabelFor(model => model.VLocation, new { @class = "control-label col-md-2", @style = "text-align: left;" })
+            </dt>
+            <dd style="padding-top:8px;">
+                @Html.EditorFor(model => model.VLocation)
+                @Html.ValidationMessageFor(model => model.VLocation)
+            </dd>
+        </dl>
+        <dl class="dl-horizontal">
+            <dt style="padding-bottom:8px;">
+                @Html.LabelFor(model => model.VType, new { @class = "control-label col-md-2", @style = "text-align: left" })
+            </dt>
+            <dd style="padding-bottom:8px;">
+                @{
+                    var DisplayVehicleType = ViewBag.selectVehicleType as IEnumerable<SelectListItem>;
+                    //var Selected = "Select Vehicle";
+                    @*@Html.DropDownListFor(model => model.VType, DisplayVehicleType, Selected, new { style = "width: 300px;margin: 12px;", @class = "txtbx text-box" })*@
+                    @Html.EnumDropDownListFor(m => m.VType, new { @class = "form-control" })
+                }
+                @Html.ValidationMessageFor(model => model.VType)
+            </dd>
+        </dl>
+        <dl class="dl-horizontal">
+            <dt style="padding-bottom:8px;">
+                @Html.LabelFor(model => model.VStatus, new { @class = "control-label col-md-2", @style = "text-align: left" })
+            </dt>
+            <dd style="padding-bottom:8px;">
+                @{
+                    var DisplayVehicleStatus = ViewBag.selectVehicleStatus as IEnumerable<SelectListItem>;
+                    //var Selected = "Select Vehicle";
+                    @*@Html.DropDownListFor(model => model.VType, DisplayVehicleType, Selected, new { style = "width: 300px;margin: 12px;", @class = "txtbx text-box" })*@
+                    @Html.EnumDropDownListFor(m => m.VStatus, new { @class = "form-control" })
+                }
+                @Html.ValidationMessageFor(model => model.VStatus)
+            </dd>
+        </dl>
+        <div class="form-group">
+            <div class="col-md-offset-3 col-md-12">
+                <input type="submit" value="Create" class="btn btn-success" style="margin-top:10px; color:white; height:35px; width:150px" />
+            </div>
+            @Html.ValidationMessage("CustomError")
+            <br />
+        </div>
+        <div>
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    </div>
+}
+
+@*@section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }*@

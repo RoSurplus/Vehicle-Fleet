@@ -1,0 +1,95 @@
+﻿@model WebAPI.Models.Vehicle
+
+@*@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_2Layout.cshtml";
+}*@
+
+<div style="width: 75%; margin-left: 12.5%;">
+    <br />
+    <h2>Vehicle</h2>
+    <h3>Delete</h3>
+    <table class="dl-horizontal">
+        <tr>
+            <td>
+                @Html.LabelFor(model => model.id, new { style = "margin-right:12px;" })
+            <td />
+            <td class="col-md-10">
+                @Html.DisplayFor(model => model.id)
+            <td />
+        <tr />
+        <tr>
+            <td>
+                @Html.LabelFor(model => model.VMake, new { style = "margin-right:12px;" })
+            <td />
+            <td class="col-md-10">
+                @Html.DisplayFor(model => model.VMake)
+            <td />
+        <tr />
+        <tr>
+            <td>
+                @Html.LabelFor(model => model.VModel, new { style = "margin-right:12px;" })
+            <td />
+            <td class="col-md-10">
+                @Html.DisplayFor(model => model.VModel)
+            <td />
+        <tr />
+        <tr>
+            <td>
+                @Html.LabelFor(model => model.VVIN, new { style = "margin-right:12px;" })
+            <td />
+            <td class="col-md-10">
+                @Html.DisplayFor(model => model.VVIN)
+            <td />
+        <tr />
+        <tr>
+            <td>
+                @Html.LabelFor(model => model.VYear, new { style = "margin-right:12px;" })
+            <td />
+            <td class="col-md-10">
+                @Html.DisplayFor(model => model.VYear)
+            <td />
+        <tr />
+        <tr>
+            <td>
+                @Html.LabelFor(model => model.VType, new { style = "margin-right:12px;" })
+            <td />
+            <td class="col-md-10">
+                @Html.DisplayFor(model => model.VType)
+            <td />
+        <tr />
+        @*<tr>
+            <td>
+                @Html.LabelFor(model => model.ModifiedBy, new { style = "margin-right:12px;" })
+            <td />
+            <td class="col-md-10">
+                @Html.DisplayFor(model => model.ModifiedBy)
+            <td />
+        </tr>*@
+        @*<tr class="form-group">
+                <td class="col-md-offset-2 col-md-10">
+                    <br />
+                    <input type="submit" value="Delete" class="btn btn-success" style="margin-top:10px; color:white; height:35px; width:150px" />
+                    <br />
+                    <br />
+                    @Html.ActionLink("Back to List", "Index")
+                    <br />
+                <td />
+            <tr />*@
+    </table>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+
+        <div>
+            <input type="submit" value="Delete" class="btn btn-success" style="margin-top:10px; color:white; height:35px; width:150px" />
+            @*@Html.ActionLink("Back to List", "Index", new { usedatatable = @ViewBag.usedatatable })*@
+            <br />
+            <br />
+            <div>
+                @Html.ActionLink("Back to List", "Index")
+            </div>
+        </div>
+    }
+</div>

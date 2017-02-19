@@ -1,0 +1,103 @@
+﻿@model WebAPI.Models.Fleet
+@using API.Library.Common
+
+@{
+    var buildVersion = typeof(WebApiApplication).Assembly.GetName().Version;
+    var version = buildVersion.ToString();
+
+    DateTime julianRoot = DateTime.Parse("2000-01-01");
+    var build = buildVersion.Build.ToString();
+    var convertedDate = julianRoot.AddDays(buildVersion.Build)
+                                .AddSeconds(2 * buildVersion.Revision); // + 3600); corrects for DST
+    var relDate = string.Format("Release {0}", convertedDate.ToString("yyMMdd.HHmm"));
+}
+
+<div style="width: 75%; margin-left: 12.5%;">
+    <h4>UniFirst Sample Fleet</h4>
+    <br/>
+    @Html.ActionLink("Create New", "Create")
+    <br/>
+    <br />
+    <table class="table">
+        <tr>
+            @*<th>
+                @Html.DisplayNameFor(dummy => @Model.FleetList[0].id)
+            </th>*@
+            <th>
+                @Html.DisplayNameFor(dummy => @Model.FleetList[0].VMake)
+            </th>
+            <th>
+                @Html.DisplayNameFor(dummy => @Model.FleetList[0].VModel)
+            </th>
+           <th>
+                @Html.DisplayNameFor(dummy => @Model.FleetList[0].VYear)
+            </th>
+            <th>
+                @Html.DisplayNameFor(dummy => @Model.FleetList[0].VVIN)
+            </th>
+            <th>
+                @Html.DisplayNameFor(dummy => @Model.FleetList[0].VRegion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(dummy => @Model.FleetList[0].VLocation)
+            </th>
+            @*<th>
+                @Html.DisplayNameFor(dummy => @Model.FleetList[0].TName)
+            </th>*@
+            <th>
+                @*@Html.DisplayNameFor(dummy => @Model.FleetList[0].VType.ToDescription())*@
+                @Html.DisplayNameFor(dummy => @Model.FleetList[0].VType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(dummy => @Model.FleetList[0].VStatus)
+            </th>
+            <th></th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model.FleetList)
+        {
+            <tr>
+                @*<td>
+                    @Html.DisplayFor(modelItem => item.id)
+                </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.VMake)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VModel)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VYear)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VVIN)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VRegion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VLocation)
+                </td>
+                <td>
+                    @*@Html.DisplayFor(modelItem => item.VType.ToDescription())*@
+                    @Html.DisplayFor(modelItem => item.VType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VStatus)
+                </td>
+                <td>
+                    @if (item.VStatus.ToString() == "STANDBY")
+                    {
+                    @Html.ActionLink("Transfer", "Transfer", new { id = item.id })
+                    }
+                </td>
+                <td>
+                    @Html.ActionLink("Delete", "Delete", new { id = item.id })
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+<div style="text-align: center;">@relDate &bull; Version @version</div>
+

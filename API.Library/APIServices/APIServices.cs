@@ -80,6 +80,12 @@ namespace API.Library.APIServices
         /// <returns>A TodaysData model containing today's data</returns>
         //TodaysData GetTodaysData();
         HW_Message GetHW_Message();
+
+        /// <summary>
+        ///     Get the serialized Fleet_File
+        /// </summary>
+        /// <returns>A serialized Fleet_File</returns>
+        HW_Message HW_Load_Fleet_File();
     }
 
     /// <summary>
@@ -382,25 +388,26 @@ namespace API.Library.APIServices
             return hw_Message;
         }
 
-        public String Load_Fleet_File()
+        public HW_Message HW_Load_Fleet_File()
         {
-            var _appSettings = new ConfigAppSettings();
-//            var filePath = this.appSettings.Get(AppSettingsKeys.Fleet_File);
-            var filePath = _appSettings.Get(AppSettingsKeys.Fleet_File);
+            // Get the file path
+            var filePath = this.appSettings.Get(AppSettingsKeys.HW_MessageFileKey);
 
             if (string.IsNullOrEmpty(filePath))
             {
                 // No file path was found, throw exception
                 throw new SettingsPropertyNotFoundException(
                     ErrorCodes.HW_MessageFileSettingsKeyError,
-                    new SettingsPropertyNotFoundException("The Fleet_File settings key was not found or had no value."));
+                    new SettingsPropertyNotFoundException("The HW_MessageFile settings key was not found or had no value."));
             }
 
-            //            var iFileIO = new TextFileIOService(new ServerHostingEnvironmentService());
-            var iFileIO = new TextFileIOService(new ServerHostingEnvironmentService());
-            String text = iFileIO.ReadFile(filePath);
+            // Get the data from the file
+            var rawData = this.fileIOService.ReadFile(filePath);
 
-            return text;
+            // Map to the return type
+            var hw_Message = this.HW_Mapper.StringToHW_Message(rawData);
+
+            return hw_Message;
         }
 
         //public void Save_Fleet_File()

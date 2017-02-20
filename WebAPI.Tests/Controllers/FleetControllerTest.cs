@@ -8,6 +8,8 @@ using API.Library.APIWrappers;
 using API.Library.APIMappers;
 using API.Library.APIResources;
 using System;
+using API.Library.Common;
+using SampleApp.Models;
 //using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace SampleApp.Tests.Controllers
@@ -120,27 +122,66 @@ namespace SampleApp.Tests.Controllers
                     string title = result.ViewBag.Title;
                     Assert.AreEqual("Fleet Page", result.ViewBag.Title);
                 }
+                ***/
+        [Test]
+        public void TestSerialationStability()
+        {
+            // Setup mocked dependencies
+            this.dataServiceMock = new Mock<IDataService>();
 
-                [Test]
-                public void TestSerialationStability()
-                {
-                    // Setup mocked dependencies
-                    this.dataServiceMock = new Mock<IDataService>();
+            // Arrange
+            controller = new FleetController(this.dataServiceMock.Object);
 
-                    // Arrange
-                    controller = new FleetController(this.dataServiceMock.Object);
+            // Create the expected result
+            var expectedResult = GetSampleHW_Message();
 
-                    // Act
-                    controller.Load_Fleet_File();
-                    int origchksum = controller.CheckSum();
-                    controller.Save_Fleet_File();
-                    controller.Load_Fleet_File();
-                    int newchksum = controller.CheckSum();
+            // Set up dependencies
+            this.dataServiceMock.Setup(m => m.HW_Load_Fleet_File()).Returns(expectedResult);
+            //// Act                                                                          
+            //var expectedResult = "Hello There5, World!"; // GetSampleHW_Message();
 
-                    // Assert
-                    Assert.AreEqual(origchksum, newchksum);
-                }
-                ****/
+            //// Set up dependencies
+            //this.dataServiceMock.Setup(m => m.HW_Load_Fleet_File()).Returns(expectedResult);
+
+            // Call the method to test
+            //            var xmlstr = this.controller.HW_Load_Fleet_File();
+            //this.controller.session_fleet = Common.FromXml<Fleet>(result);
+            //this.controller.session_fleet.fix_NextID();
+            //int origchksum = controller.CheckSum();
+
+            //            var result = this.controller.Get();
+
+            //            int origchksum = controller.CheckSum();
+            //controller.Save_Fleet_File();
+            //controller.Load_Fleet_File();
+            //int newchksum = controller.CheckSum();
+
+            // Assert
+            //            Assert.AreEqual(origchksum, newchksum);
+            //            Assert.AreNotEqual(origchksum, 0);
+            var result = this.controller.HW_Load_Fleet_File();
+
+            // Check values
+            Assert.NotNull(result);
+            //Assert.AreEqual(result.Data, expectedResult.Data);
+            Assert.AreEqual(result, expectedResult.Data);
+        }
+
+        //protected virtual void Dispose(bool disposing)
+        //{
+        //    if (disposing)
+        //    {
+        //        // dispose managed resources
+        //        newFile.Close();
+        //    }
+        //    // free native resources
+        //}
+
+        //public void Dispose()
+        //{
+        //    Dispose(true);
+        //    GC.SuppressFinalize(this);
+        //}
 
         #region Helper Methods
         /// <summary>

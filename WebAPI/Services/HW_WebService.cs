@@ -127,13 +127,73 @@ namespace SampleApp.Services
             return hw_MessageData;
         }
 
-        public String Load_Fleet_File()
-        {
-            var filePath = this.appSettings.Get(AppSettingsKeys.Fleet_File);
-            var iFileIO = new TextFileIOService(new ServerHostingEnvironmentService());
-            String text = iFileIO.ReadFile(filePath);
+        //public String Load_Fleet_File()
+        //{
+        //    var filePath = this.appSettings.Get(AppSettingsKeys.Fleet_File);
+        //    var iFileIO = new TextFileIOService(new ServerHostingEnvironmentService());
+        //    String text = iFileIO.ReadFile(filePath);
 
-            return text;
+        //    return text;
+        //}
+        /// <summary>
+        ///     Gets today's data from the web API
+        /// </summary>
+        /// <returns>A TodaysData model containing today's data</returns>
+        public HW_Message HW_Load_Fleet_File()
+        {
+            HW_Message hw_MessageData = null;
+
+            // Set the URL for the request
+            this.restClient.BaseUrl = this.uriService.GetUri(this.appSettings.Get(AppSettingsKeys.WebAPIUrlKey));
+
+            // Setup the request
+            this.restRequest.Resource = "hw_message";
+            this.restRequest.Method = Method.GET;
+
+            // Clear the request parameters
+            this.restRequest.Parameters.Clear();
+
+            // Execute the call and get the response
+            var hw_MessageDataResponse = this.restClient.Execute<HW_Message>(this.restRequest);
+
+            // Check for data in the response
+            if (hw_MessageDataResponse != null)
+            {
+                // Check if any actual data was returned
+                if (hw_MessageDataResponse.Data != null)
+                {
+                    hw_MessageData = hw_MessageDataResponse.Data;
+                }
+                else
+                {
+                    var errorMessage = "Error in RestSharp, most likely in endpoint URL." + " Error message: "
+                                       + hw_MessageDataResponse.ErrorMessage + " HTTP Status Code: "
+                                       + hw_MessageDataResponse.StatusCode + " HTTP Status Description: "
+                                       + hw_MessageDataResponse.StatusDescription;
+
+                    // Check for existing exception
+                    if (hw_MessageDataResponse.ErrorMessage != null && hw_MessageDataResponse.ErrorException != null)
+                    {
+                        // Log an informative exception including the RestSharp exception
+                        this.logger.Error(errorMessage, null, hw_MessageDataResponse.ErrorException);
+                    }
+                    else
+                    {
+                        // Log an informative exception including the RestSharp content
+                        this.logger.Error(errorMessage, null, new Exception(hw_MessageDataResponse.Content));
+                    }
+                }
+            }
+            else
+            {
+                // Log the exception
+                const string ErrorMessage =
+                    "Did not get any response from the Web Api for the Method: GET /todaysdata";
+
+                this.logger.Error(ErrorMessage, null, new Exception(ErrorMessage));
+            }
+
+            return hw_MessageData;
         }
     }
 }

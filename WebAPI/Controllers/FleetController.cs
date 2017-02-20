@@ -23,6 +23,8 @@ using System.Xml.Serialization;
 using System.Xml;
 using System.Net;
 using API.Library.APIAttributes;
+using API.Library.APIWrappers;
+using API.Library.APIMappers;
 
 namespace SampleApp.Controllers
 {
@@ -33,9 +35,30 @@ namespace SampleApp.Controllers
         /// </summary>
         private readonly IDataService dataService;
 
+        ///// <summary>
+        /////     The application settings service
+        ///// </summary>
+        //private readonly IAppSettings appSettings;
+
+        ///// <summary>
+        /////     The DateTime wrapper
+        ///// </summary>
+        //private readonly IDateTime dateTimeWrapper;
+
+        ///// <summary>
+        /////     The File IO service
+        ///// </summary>
+        //private readonly IFileIOService fileIOService;
+
+        ///// <summary>
+        /////     The Mapper
+        ///// </summary>
+        //private readonly IHW_Mapper HW_Mapper;
+
         public FleetController()
         {
             this.dataService = null;
+//            this.dataService = new HW_DataService(new AppSettings(), new IDateTime(), new IFileIOService(), IHW_Mapper);
         }
 
         /// <summary>
@@ -56,7 +79,10 @@ namespace SampleApp.Controllers
         [WebApiExceptionFilter(Type = typeof(SettingsPropertyNotFoundException), Status = HttpStatusCode.ServiceUnavailable, Severity = SeverityCode.Error)]
         public HW_Message Get()
         {
-            return this.dataService.GetHW_Message();
+
+            HW_Message ret = null;
+//            ret = this.dataService.GetHW_Message();
+            return ret;
         }
 
         public static Fleet session_fleet = new Fleet();
@@ -98,6 +124,8 @@ namespace SampleApp.Controllers
         public void Load_Fleet_File()
         {
             session_fleet_file_invalid = false;
+
+            var temp = Get();
 //            HW_Message message =  this.dataService.GetHW_Message();
 
             //            String text = this.WebService.Load_Fleet_File();

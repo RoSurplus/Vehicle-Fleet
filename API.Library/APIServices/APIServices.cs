@@ -384,7 +384,19 @@ namespace API.Library.APIServices
 
         public String Load_Fleet_File()
         {
-            var filePath = ConfigurationManager.AppSettings.Get(AppSettingsKeys.Fleet_File);
+            var _appSettings = new ConfigAppSettings();
+//            var filePath = this.appSettings.Get(AppSettingsKeys.Fleet_File);
+            var filePath = _appSettings.Get(AppSettingsKeys.Fleet_File);
+
+            if (string.IsNullOrEmpty(filePath))
+            {
+                // No file path was found, throw exception
+                throw new SettingsPropertyNotFoundException(
+                    ErrorCodes.HW_MessageFileSettingsKeyError,
+                    new SettingsPropertyNotFoundException("The Fleet_File settings key was not found or had no value."));
+            }
+
+            //            var iFileIO = new TextFileIOService(new ServerHostingEnvironmentService());
             var iFileIO = new TextFileIOService(new ServerHostingEnvironmentService());
             String text = iFileIO.ReadFile(filePath);
 

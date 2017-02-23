@@ -138,7 +138,9 @@
     <Compile Include="UnitTests\ConsoleAppUnitTests.cs" />
     <Compile Include="UnitTests\DataServiceUnitTests.cs" />
     <Compile Include="UnitTests\MapperUnitTests.cs" />
+    <Compile Include="UnitTests\CommonUnitTests.cs" />
     <Compile Include="UnitTests\WebServiceUnitTests.cs" />
+    <Compile Include="Models\VehiclesUnitTests.cs" />
     <Compile Include="UnitTests\HW_MessageControllerUnitTests.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -52,13 +52,18 @@ namespace SampleApp.Tests.Controllers
         /// </summary>
         private FleetController controller;
 
-
         /// <summary>
         ///     Initialize the test fixture (runs one time)
         /// </summary>
         [TestFixtureSetUp]
         public void InitTestSuite()
         {
+            // Setup mocked dependencies
+            this.dataServiceMock = new Mock<IDataService>();
+
+            // Create object to test
+            this.controller = new FleetController(this.dataServiceMock.Object);
+
             // Setup mocked dependencies
             this.appSettingsMock = new Mock<IAppSettings>();
             this.dateTimeWrapperMock = new Mock<IDateTime>();
@@ -76,14 +81,8 @@ namespace SampleApp.Tests.Controllers
         [Test]
         public void Get()
         {
-            // Setup mocked dependencies
-            this.dataServiceMock = new Mock<IDataService>();
-
-            // Arrange
-            controller = new FleetController(this.dataServiceMock.Object);
-
             // Create the expected result
-            var expectedResult = GetSampleHW_Message();
+            var expectedResult = GetSampleHW_Message("Hello There5, World!");
 
             // Set up dependencies
             this.dataServiceMock.Setup(m => m.GetHW_Message()).Returns(expectedResult);
@@ -96,41 +95,74 @@ namespace SampleApp.Tests.Controllers
             Assert.AreEqual(result.Data, expectedResult.Data);
         }
 
-        /***
-                [Test]
-                public void Index()
-                {
-                    // Create return models for dependencies
-                    const string DataFilePath = "some/path";
-                    const string FileContents = "";
+        //[Test]
+        //public void Index()
+        //{
+        //    // Arrange
+        //    FleetController c = new FleetController();
 
-                    // Setup mocked dependencies
-                    this.dataServiceMock = new Mock<IDataService>();
+        //    // Act
+        //    ViewResult result = c.Index() as ViewResult;
 
-                    // Set up dependencies
-                    this.appSettingsMock.Setup(m => m.Get(AppSettingsKeys.Fleet_File)).Returns(DataFilePath);
-                    this.fileIOServiceMock.Setup(m => m.ReadFile(DataFilePath)).Returns(FileContents);
+        //    Assert.IsNotNull(result);
+        //    string title = result.ViewBag.Title;
+        //    Assert.AreEqual("Fleet Page", title);
+        //}
 
-                    // Arrange
-                    controller = new FleetController(this.dataServiceMock.Object);
+        //[Test]
+        //public void Index()
+        //{
+        //    // Create return models for dependencies
+        //    const string DataFilePath = "some/path";
+        //    const string FileContents = "";
 
-                    // Act
-                    ViewResult result = controller.Index() as ViewResult;
+        //    // Setup mocked dependencies
+        //    this.dataServiceMock = new Mock<IDataService>();
 
-                    // Assert
-                    Assert.IsNotNull(result);
-                    string title = result.ViewBag.Title;
-                    Assert.AreEqual("Fleet Page", result.ViewBag.Title);
-                }
-                ***/
+        //    // Set up dependencies
+        //    this.appSettingsMock.Setup(m => m.Get(AppSettingsKeys.Fleet_File)).Returns(DataFilePath);
+        //    this.fileIOServiceMock.Setup(m => m.ReadFile(DataFilePath)).Returns(FileContents);
+
+        //    // Arrange
+        //    controller = new FleetController(this.dataServiceMock.Object);
+
+        //    // Act
+        //    ViewResult result = controller.Index() as ViewResult;
+
+        //    // Assert
+        //    Assert.IsNotNull(result);
+        //    string title = result.ViewBag.Title;
+        //    Assert.AreEqual("Fleet Page", result.ViewBag.Title);
+        //}
+
+        /// <summary>
+        ///     Tests the controller's get method for success
+        /// </summary>
         [Test]
-        public void TestSerialationStability()
+        public void UnitTestFleetControllerHW_Load_Fleet_FileSuccess()
         {
-            // Setup mocked dependencies
-            this.dataServiceMock = new Mock<IDataService>();
+            // Create the expected result
+            var expectedResult = GetSampleHW_Message("Hello There5, World!");
 
-            // Arrange
-            controller = new FleetController(this.dataServiceMock.Object);
+            // Set up dependencies
+            this.dataServiceMock.Setup(m => m.GetHW_Message()).Returns(expectedResult);
+
+            // Call the method to test
+            var result = this.controller.Get();
+
+            // Check values
+            Assert.NotNull(result);
+            Assert.AreEqual(result.Data, expectedResult.Data);
+        }
+
+        [Test]
+        public void TestSerialationStabilityX()
+        {
+            //// Setup mocked dependencies
+            //this.dataServiceMock = new Mock<IDataService>();
+
+            //// Arrange
+            //controller = new FleetController(this.dataServiceMock.Object);
 
             // Create the expected result
             var expectedResult = GetSampleFleet_File();
@@ -138,7 +170,7 @@ namespace SampleApp.Tests.Controllers
             // Set up dependencies
             this.dataServiceMock.Setup(m => m.HW_Load_Fleet_File()).Returns(expectedResult);
             //// Act                                                                          
-            //var expectedResult = "Hello There5, World!"; // GetSampleHW_Message();
+            //var expectedResult = "Hello There5, World!"; // GetSampleHW_Message("Hello There5, World!");
 
             //// Set up dependencies
             //this.dataServiceMock.Setup(m => m.HW_Load_Fleet_File()).Returns(expectedResult);
@@ -188,11 +220,11 @@ namespace SampleApp.Tests.Controllers
         ///     Gets a sample HW_Message model
         /// </summary>
         /// <returns>A sample HW_Message model</returns>
-        private static HW_Message GetSampleHW_Message()
+        private static HW_Message GetSampleHW_Message(string data)
         {
             return new HW_Message()
             {
-                Data = "Hello There5, World!"
+                Data = data // "Hello There5, World!"
             };
         }
 

@@ -109,7 +109,7 @@ namespace SampleApp.Tests.UnitTests
             this.otherPropertiesList.Clear();
         }
 
-        #region GetTodaysData Tests
+        #region WebService Tests
         /// <summary>
         ///     Tests the class's GetTodaysData method for success when normal data was found
         /// </summary>

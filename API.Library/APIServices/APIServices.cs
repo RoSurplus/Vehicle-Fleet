@@ -391,7 +391,7 @@ namespace API.Library.APIServices
         public HW_Message HW_Load_Fleet_File()
         {
             // Get the file path
-            var filePath = this.appSettings.Get(AppSettingsKeys.HW_MessageFileKey);
+            var filePath = this.appSettings.Get(AppSettingsKeys.Fleet_File);
 
             if (string.IsNullOrEmpty(filePath))
             {

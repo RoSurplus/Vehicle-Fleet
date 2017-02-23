@@ -25,6 +25,6 @@ namespace SampleApp.Services
         ///     Gets FleetFile's data from the web API
         /// </summary>
         /// <returns>A HW_Message model containing Message's data</returns>
-        HW_Message HW_Load_Fleet_File();
+//        HW_Message HW_Load_Fleet_File();
     }
 }

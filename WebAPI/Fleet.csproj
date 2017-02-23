@@ -281,6 +281,7 @@
     <Content Include="Views\Fleet\Index.cshtml" />
     <Content Include="Views\Fleet\Create.cshtml" />
     <Content Include="Views\Fleet\Delete.cshtml" />
+    <None Include="Views\Fleet\Transfer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />

@@ -133,7 +133,7 @@ namespace SampleApp.Tests.Controllers
             controller = new FleetController(this.dataServiceMock.Object);
 
             // Create the expected result
-            var expectedResult = GetSampleHW_Message();
+            var expectedResult = GetSampleFleet_File();
 
             // Set up dependencies
             this.dataServiceMock.Setup(m => m.HW_Load_Fleet_File()).Returns(expectedResult);
@@ -177,11 +177,11 @@ namespace SampleApp.Tests.Controllers
         //    // free native resources
         //}
 
-        //public void Dispose()
-        //{
-        //    Dispose(true);
-        //    GC.SuppressFinalize(this);
-        //}
+      //  public void Dispose()
+      //  {
+      ////      base.Dispose(true);
+      //      GC.SuppressFinalize(this);
+      //  }
 
         #region Helper Methods
         /// <summary>
@@ -193,6 +193,19 @@ namespace SampleApp.Tests.Controllers
             return new HW_Message()
             {
                 Data = "Hello There5, World!"
+            };
+        }
+
+        /// <summary>
+        ///     Gets a sample Fleet_File model
+        /// </summary>
+        /// <returns>A sample Fleet_File model</returns>
+        /// 
+        private static HW_Message GetSampleFleet_File()
+        {
+            return new HW_Message()
+            {
+                Data = "Hello Fleet File!"
             };
         }
         #endregion

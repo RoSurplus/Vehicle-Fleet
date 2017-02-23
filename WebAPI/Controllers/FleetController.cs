@@ -349,4 +349,44 @@ namespace SampleApp.Controllers
             base.Dispose(disposing);
         }
     }
+
+    //static void Main (string[] args)
+    //{
+    //    Dal<Supplier> obj = new Dal<Supplier>();
+    //    obj.Add(new Supplier());
+
+    //    Dal<int> test = new Dal<int>(); // is a syntax error only when the "where AnyType : class" is part of the Dal definition
+    //    test.Add(100);
+    //}
+
+    //public class Dal<AnyType> where AnyType : class // so generic can not be an int or string, etc
+    //{
+    //    public void Add(AnyType obj)
+    //    {
+
+    //    }
+    //}
+    //public class Customer { }
+    //public class Supplier { }
+
+    //static void Main(string[] args)
+    //{
+    //    Check<int> obj = new Check<int>();
+    //    bool b1 = obj.Compare(1, 2);
+
+    //    Check<string> objString = new Check<string>();
+    //    bool b2 = objString.Compare("shiv", "raju");
+    //}
+
+    //public class Check<UNKNOWDATATYPE>
+    //{
+    //    public bool Compare(UNKNOWDATATYPE i, UNKNOWDATATYPE j)
+    //    {
+    //        if (i.Equals(j))
+    //        {
+    //            return false;
+    //        }
+    //        return false;
+    //    }
+    //}
 }

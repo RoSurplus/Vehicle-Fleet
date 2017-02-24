@@ -26,7 +26,6 @@ using API.Library.APIAttributes;
 using API.Library.APIWrappers;
 using API.Library.APIMappers;
 using API.Library.Services;
-//  using System.Web.Http;
 
 namespace SampleApp.Controllers
 {
@@ -39,31 +38,26 @@ namespace SampleApp.Controllers
         /// <summary>
         ///     The data service
         /// </summary>
-//        private readonly IDataService dataService;
         private IDataService dataService;
 
         /// <summary>
         ///     The application settings service
         /// </summary>
-//        private readonly IAppSettings appSettings;
         private IAppSettings appSettings;
 
         /// <summary>
         ///     The DateTime wrapper
         /// </summary>
-//        private readonly IDateTime dateTimeWrapper;
         private IDateTime dateTimeWrapper;
 
         /// <summary>
         ///     The File IO service
         /// </summary>
-//        private readonly IFileIOService fileIOService;
         private IFileIOService fileIOService;
 
         /// <summary>
         ///     The Mapper
         /// </summary>
-//        private readonly IHW_Mapper HW_Mapper;
         private IHW_Mapper HW_Mapper;
 
         public FleetController()
@@ -94,7 +88,6 @@ namespace SampleApp.Controllers
         [WebApiExceptionFilter(Type = typeof(SettingsPropertyNotFoundException), Status = HttpStatusCode.ServiceUnavailable, Severity = SeverityCode.Error)]
         public HW_Message Get()
         {
-
             HW_Message ret = null;
             ret = this.dataService.GetHW_Message();
             return ret;
@@ -149,18 +142,15 @@ namespace SampleApp.Controllers
         {
             if (session_fleet_file_invalid)
             {
-                if (dataService == null)
-                {
-                    var filePath = ConfigurationManager.AppSettings.Get(AppSettingsKeys.Fleet_File);
+                //if (dataService == null)
+                //{
+                //    var filePath = ConfigurationManager.AppSettings.Get(AppSettingsKeys.Fleet_File);
 
-                    var iFileIO = new TextFileIOService(new ServerHostingEnvironmentService());
-                    iFileIO.WriteFile(filePath, Common.ToXML(session_fleet));
-                }
-                else
-                {
-
+                //    var iFileIO = new TextFileIOService(new ServerHostingEnvironmentService());
+                //    iFileIO.WriteFile(filePath, Common.ToXML(session_fleet));
+                //}
+                //else
                     this.dataService.PutFleet_File(Common.ToXML(session_fleet));
-                }
             }
         }
 
@@ -186,6 +176,16 @@ namespace SampleApp.Controllers
             session_fleet.fix_NextID();
 
             var model = session_fleet; //  Create_Fleet_File();
+
+            var vlist = Enum.GetValues(typeof(v_status)).Cast<v_status>().Select(v => new SelectListItem
+            {
+                Text = v.ToString(),
+                Value = ((int)v).ToString()
+                ,
+                Selected = (v.ToString() == "stand-by")
+            }).ToList();
+
+            ViewBag.selectVehicleStatus = vlist;
 
             return View(model);
         }
@@ -243,20 +243,67 @@ namespace SampleApp.Controllers
             }
             return View(model);
         }
-
         // GET: Fleet/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Transfer(int id)
         {
-            return View();
+            Vehicle viewmodel = session_fleet.FleetList.Find(x => x.id == id);
+
+            return View(viewmodel);
         }
 
-        // POST: Fleet/Edit/5
+        // POST: Fleet/Transfer/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Transfer(int id, [Bind(Include = "VMake,VModel,VYear,VVIN,VType,VStatus,VRegion,VLocation")] Vehicle model)
         {
             try
             {
                 // TODO: Add update logic here
+                var veh = session_fleet.FleetList.Find(x => x.id == id);
+                if (veh != null)
+                {
+                    if (veh.VStatus != model.VStatus || veh.VLocation != model.VLocation || veh.VRegion != model.VRegion)
+                    {
+                        session_fleet_file_invalid = true;
+                        veh.VStatus = model.VStatus;
+                        veh.VLocation = model.VLocation;
+                        veh.VRegion = model.VRegion;
+                    }
+                }
+
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        // GET: Fleet/Edit/5
+        public ActionResult Edit(int id)
+        {
+            Vehicle viewmodel = session_fleet.FleetList.Find(x => x.id == id);
+
+            return View(viewmodel);
+        }
+
+        // POST: Fleet/Edit/5
+        [HttpPost]
+        public ActionResult Edit(int id, [Bind(Include = "VMake,VModel,VYear,VVIN,VType,VStatus,VRegion,VLocation")] Vehicle model)
+        {
+            try
+            {
+                // TODO: Add update logic here
+                var veh = session_fleet.FleetList.Find(x => x.id == id);
+                if (veh != null)
+                {
+                    if (veh.VStatus != model.VStatus)
+                    {
+                        session_fleet_file_invalid = true;
+                        //veh.VLocation = model.VLocation;
+                        //veh.VRegion = model.VRegion;
+                        veh.VStatus = model.VStatus;
+                    }
+                }
 
                 return RedirectToAction("Index");
             }

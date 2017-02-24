@@ -79,8 +79,6 @@
             <dd style="padding-bottom:8px;">
                 @{
                     var DisplayVehicleType = ViewBag.selectVehicleType as IEnumerable<SelectListItem>;
-                    //var Selected = "Select Vehicle";
-                    @*@Html.DropDownListFor(model => model.VType, DisplayVehicleType, Selected, new { style = "width: 300px;margin: 12px;", @class = "txtbx text-box" })*@
                     @Html.EnumDropDownListFor(m => m.VType, new { @class = "form-control" })
                 }
                 @Html.ValidationMessageFor(model => model.VType)
@@ -93,8 +91,6 @@
             <dd style="padding-bottom:8px;">
                 @{
                     var DisplayVehicleStatus = ViewBag.selectVehicleStatus as IEnumerable<SelectListItem>;
-                    //var Selected = "Select Vehicle";
-                    @*@Html.DropDownListFor(model => model.VType, DisplayVehicleType, Selected, new { style = "width: 300px;margin: 12px;", @class = "txtbx text-box" })*@
                     @Html.EnumDropDownListFor(m => m.VStatus, new { @class = "form-control" })
                 }
                 @Html.ValidationMessageFor(model => model.VStatus)
@@ -113,6 +109,3 @@
     </div>
 }
 
-@*@section Scripts {
-        @Scripts.Render("~/bundles/jqueryval")
-    }*@

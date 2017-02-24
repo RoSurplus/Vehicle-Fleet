@@ -85,11 +85,9 @@ namespace SampleApp.Tests.UnitTests
             var expectedResult = FileContents;
 
             // Set up dependencies
-//            this.appSettingsMock.Setup(m => m.Get(AppSettingsKeys.HW_MessageFileKey)).Returns(DataFilePath);
             this.appSettingsMock.Setup(m => m.Get(AppSettingsKeys.Fleet_File)).Returns(DataFilePath);
             this.fileIOServiceMock.Setup(m => m.ReadFile(DataFilePath)).Returns(FileContents);
             this.dateTimeWrapperMock.Setup(m => m.Now()).Returns(nowDate);
-//            this.HW_MapperMock.Setup(m => m.StringToHW_Message(FileContents)).Returns(expectedResult);
 
             // Call the method to test
             var result = this.HW_DataService.GetFleet_File();

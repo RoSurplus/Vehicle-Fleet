@@ -7,7 +7,9 @@
       <VModel>Cougar</VModel>
       <VYear>1967</VYear>
       <VVIN>qwertqwert01234567890123</VVIN>
-      <VStatus xsi:nil="true" />
+      <VStatus>INSERVICE</VStatus>
+      <VRegion>South</VRegion>
+      <VLocation>Branch 4</VLocation>
       <VType>CAR</VType>
     </Vehicle>
     <Vehicle>
@@ -16,7 +18,9 @@
       <VModel>G20</VModel>
       <VYear>1971</VYear>
       <VVIN>kwertkwert01234567890123</VVIN>
-      <VStatus xsi:nil="true" />
+      <VStatus>STANDBY</VStatus>
+      <VRegion>Central</VRegion>
+      <VLocation>Hub</VLocation>
       <VType>VAN</VType>
     </Vehicle>
     <Vehicle>
@@ -25,7 +29,9 @@
       <VModel>S150</VModel>
       <VYear>1988</VYear>
       <VVIN>dwertdwert01234567890123</VVIN>
-      <VStatus xsi:nil="true" />
+      <VStatus>INTRANSIT</VStatus>
+      <VRegion>West</VRegion>
+      <VLocation>Branch 2</VLocation>
       <VType>TRUCK</VType>
     </Vehicle>
     <Vehicle>
@@ -34,7 +40,9 @@
       <VModel>Semi</VModel>
       <VYear>1994</VYear>
       <VVIN>twerttwert01234567890123</VVIN>
-      <VStatus xsi:nil="true" />
+      <VStatus>INREPAIR</VStatus>
+      <VRegion>East</VRegion>
+      <VLocation>Branch 7</VLocation>
       <VType>SEMI</VType>
     </Vehicle>
     <Vehicle>
@@ -43,35 +51,10 @@
       <VModel>Trailer</VModel>
       <VYear>2011</VYear>
       <VVIN>pwertpwert01234567890123</VVIN>
-      <VStatus xsi:nil="true" />
+      <VStatus>INSERVICE</VStatus>
+      <VRegion>Central</VRegion>
+      <VLocation>Branch 1</VLocation>
       <VType>TRAILER</VType>
-    </Vehicle>
-    <Vehicle>
-      <id>6</id>
-      <VMake>Toyota</VMake>
-      <VModel>Prius</VModel>
-      <VYear>1999</VYear>
-      <VVIN>fdfad54333dfasd334561111</VVIN>
-      <VStatus xsi:nil="true" />
-      <VType>CAR</VType>
-    </Vehicle>
-    <Vehicle>
-      <id>8</id>
-      <VMake>Ford</VMake>
-      <VModel>Fusion</VModel>
-      <VYear>2013</VYear>
-      <VVIN>rrfdg45332yrtrg123453333</VVIN>
-      <VStatus xsi:nil="true" />
-      <VType>CAR</VType>
-    </Vehicle>
-    <Vehicle>
-      <id>9</id>
-      <VMake>Volkwagon</VMake>
-      <VModel>Beetle</VModel>
-      <VYear>1991</VYear>
-      <VVIN>rrfdg45332yrtxg123453333</VVIN>
-      <VStatus xsi:nil="true" />
-      <VType>CAR</VType>
     </Vehicle>
     <Vehicle>
       <id>10</id>
@@ -81,7 +64,7 @@
       <VVIN>asdfd11111dfdfd444442222</VVIN>
       <VStatus>STANDBY</VStatus>
       <VRegion>North</VRegion>
-      <VLocation>Branch 6</VLocation>
+      <VLocation>Branch 3</VLocation>
       <VType>VAN</VType>
     </Vehicle>
   </FleetList>

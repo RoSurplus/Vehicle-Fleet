@@ -81,7 +81,7 @@
                 @Html.LabelFor(model => model.VRegion, new { @class = "control-label col-md-2", @style = "text-align: left;" })
             </dt>
             <dd style="padding-top:8px;">
-                @Html.EditorFor(model => model.VRegion)
+                @Html.DisplayFor(model => model.VRegion)
                 @Html.ValidationMessageFor(model => model.VRegion)
             </dd>
         </dl>
@@ -90,7 +90,7 @@
                 @Html.LabelFor(model => model.VLocation, new { @class = "control-label col-md-2", @style = "text-align: left;" })
             </dt>
             <dd style="padding-top:8px;">
-                @Html.EditorFor(model => model.VLocation)
+                @Html.DisplayFor(model => model.VLocation)
                 @Html.ValidationMessageFor(model => model.VLocation)
             </dd>
         </dl>

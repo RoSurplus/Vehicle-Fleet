@@ -89,7 +89,11 @@
                 <td>
                     @if (item.VStatus.ToString() == "STANDBY")
                     {
-                    @Html.ActionLink("Transfer", "Transfer", new { id = item.id })
+                        @Html.ActionLink("Transfer", "Transfer", new { id = item.id })
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Edit", "Edit", new { id = item.id })
                     }
                 </td>
                 <td>

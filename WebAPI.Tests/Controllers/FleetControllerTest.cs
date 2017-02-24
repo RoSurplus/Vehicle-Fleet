@@ -158,12 +158,6 @@ namespace SampleApp.Tests.Controllers
         [Test]
         public void TestSerialationStabilityX()
         {
-            //// Setup mocked dependencies
-            //this.dataServiceMock = new Mock<IDataService>();
-
-            //// Arrange
-            //controller = new FleetController(this.dataServiceMock.Object);
-
             // Create the expected result
             var expectedResult = GetSampleFleet_File();
 
@@ -195,8 +189,7 @@ namespace SampleApp.Tests.Controllers
 
             // Check values
             Assert.NotNull(result);
-            //Assert.AreEqual(result.Data, expectedResult.Data);
-            Assert.AreEqual(result, expectedResult.Data);
+            Assert.AreEqual(result, expectedResult);
         }
 
         //protected virtual void Dispose(bool disposing)
@@ -233,12 +226,14 @@ namespace SampleApp.Tests.Controllers
         /// </summary>
         /// <returns>A sample Fleet_File model</returns>
         /// 
-        private static HW_Message GetSampleFleet_File()
+        private static string GetSampleFleet_File()
         {
-            return new HW_Message()
-            {
-                Data = "Hello Fleet File!"
-            };
+            //return new HW_Message()
+            //{
+            //    Data = "Hello Fleet File!"
+            //};
+
+            return "Hello Fleet File!";
         }
         #endregion
     }

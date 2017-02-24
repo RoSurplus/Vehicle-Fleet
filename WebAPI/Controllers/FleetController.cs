@@ -89,38 +89,11 @@ namespace SampleApp.Controllers
         [WebApiExceptionFilter(Type = typeof(SettingsPropertyNotFoundException), Status = HttpStatusCode.ServiceUnavailable, Severity = SeverityCode.Error)]
         public String HW_Load_Fleet_File()
         {
-            HW_Message ret = null;
+            string ret = null;
+
             ret = this.dataService.HW_Load_Fleet_File();
-            return ret.Data;
-            //String ret = null;
-            //ret = this.dataService.HW_Load_Fleet_File();
-            //return ret;
-            //session_fleet_file_invalid = false;
-
-            ////            var temp = Get();
-            ////            HW_Message message =  this.dataService.GetHW_Message();
-
-            ////            String text = this.WebService.Load_Fleet_File();
-            ////var filePath = ConfigurationManager.AppSettings.Get(AppSettingsKeys.Fleet_File);
-            ////var iFileIO = new TextFileIOService(new ServerHostingEnvironmentService());
-            ////String text = iFileIO.ReadFile(filePath);
-            ////HW_Message message = this.dataService.GetHW_Message();
-
-            ////            String ret = this.dataService.HW_Load_Fleet_File();
-            //String ret = "Null Returned";
-
-            //HW_Message result = this.dataService.GetHW_Message();
-
-            //if (result != null)
-            //{
-            //    ret = result.Data;
-            //}
-
-            ////            session_fleet = Common.FromXml<Fleet>(text);
-            ////           session_fleet.fix_NextID();
-            //return ret;
+            return ret;
         }
-
 
         public static Fleet session_fleet = new Fleet();
         static bool session_fleet_file_invalid = false;
@@ -140,16 +113,16 @@ namespace SampleApp.Controllers
             session_fleet.FleetList.Add(veh);
         }
 
-        public void Load_Fleet_File()
+        public Fleet Load_Fleet_File()
         {
             session_fleet_file_invalid = false;
 
             var filePath = ConfigurationManager.AppSettings.Get(AppSettingsKeys.Fleet_File);
             var iFileIO = new TextFileIOService(new ServerHostingEnvironmentService());
             String text = iFileIO.ReadFile(filePath);
+            // var text = HW_Load_Fleet_File();
 
-            session_fleet = Common.FromXml<Fleet>(text);
-            session_fleet.fix_NextID();
+            return Common.FromXml<Fleet>(text);
         }
 
         public void Save_Fleet_File()
@@ -186,7 +159,8 @@ namespace SampleApp.Controllers
             //    this.logger = logger;
             ViewBag.Title = "Fleet Page";
 
-            Load_Fleet_File();
+            session_fleet = Load_Fleet_File();
+            session_fleet.fix_NextID();
 
             var model = session_fleet; //  Create_Fleet_File();
 
@@ -227,7 +201,8 @@ namespace SampleApp.Controllers
                 try
                 {
                     // TODO: Add insert logic here
-                    Load_Fleet_File();
+                    session_fleet = Load_Fleet_File();
+                    session_fleet.fix_NextID();
 
                     model.id = session_fleet.get_NextID();
 
@@ -276,7 +251,8 @@ namespace SampleApp.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            Load_Fleet_File();
+            session_fleet = Load_Fleet_File();
+            session_fleet.fix_NextID();
 
             Vehicle veh = session_fleet.FleetList.FirstOrDefault(x => x.id == id);
             if (veh == null)
@@ -284,7 +260,6 @@ namespace SampleApp.Controllers
                 return HttpNotFound();
             }
             return View(veh);
-            //            return View();
         }
 
         // POST: Fleet/Delete/5
@@ -307,7 +282,9 @@ namespace SampleApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id)
         {
-            Load_Fleet_File();
+            session_fleet = Load_Fleet_File();
+            session_fleet.fix_NextID();
+
             Vehicle veh = session_fleet.FleetList.FirstOrDefault(x => x.id == id);
 
             try

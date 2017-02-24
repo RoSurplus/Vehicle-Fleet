@@ -74,6 +74,35 @@ namespace SampleApp.Tests.UnitTests
         ///     Tests the class's GetTodaysData method for success
         /// </summary>
         [Test]
+        public void UnitTestHWDataServiceHW_Load_Fleet_FileSuccess()
+        {
+            // Create return models for dependencies
+            const string DataFilePath = "some/path";
+            const string FileContents = "Fleet File Data.";
+            var nowDate = DateTime.Now;
+
+            //            var expectedResult = GetSampleHW_Message(FileContents);
+            var expectedResult = FileContents;
+
+            // Set up dependencies
+//            this.appSettingsMock.Setup(m => m.Get(AppSettingsKeys.HW_MessageFileKey)).Returns(DataFilePath);
+            this.appSettingsMock.Setup(m => m.Get(AppSettingsKeys.Fleet_File)).Returns(DataFilePath);
+            this.fileIOServiceMock.Setup(m => m.ReadFile(DataFilePath)).Returns(FileContents);
+            this.dateTimeWrapperMock.Setup(m => m.Now()).Returns(nowDate);
+//            this.HW_MapperMock.Setup(m => m.StringToHW_Message(FileContents)).Returns(expectedResult);
+
+            // Call the method to test
+            var result = this.HW_DataService.HW_Load_Fleet_File();
+
+            // Check values
+            NUnit.Framework.Assert.NotNull(result);
+            NUnit.Framework.Assert.AreEqual(result, expectedResult);
+        }
+
+        /// <summary>
+        ///     Tests the class's GetTodaysData method for success
+        /// </summary>
+        [Test]
         public void UnitTestHWDataServiceGetHW_MessageSuccess()
         {
             // Create return models for dependencies

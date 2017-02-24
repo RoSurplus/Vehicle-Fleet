@@ -85,7 +85,7 @@ namespace API.Library.APIServices
         ///     Get the serialized Fleet_File
         /// </summary>
         /// <returns>A serialized Fleet_File</returns>
-        HW_Message HW_Load_Fleet_File();
+        string HW_Load_Fleet_File();
     }
 
     /// <summary>
@@ -388,7 +388,11 @@ namespace API.Library.APIServices
             return hw_Message;
         }
 
-        public HW_Message HW_Load_Fleet_File()
+        /// <summary>
+        ///     The Fleet File data
+        /// </summary>
+        /// <returns>The Text of the Fleet File data</returns>
+        public string HW_Load_Fleet_File()
         {
             // Get the file path
             var filePath = this.appSettings.Get(AppSettingsKeys.Fleet_File);
@@ -398,16 +402,16 @@ namespace API.Library.APIServices
                 // No file path was found, throw exception
                 throw new SettingsPropertyNotFoundException(
                     ErrorCodes.HW_MessageFileSettingsKeyError,
-                    new SettingsPropertyNotFoundException("The HW_MessageFile settings key was not found or had no value."));
+                    new SettingsPropertyNotFoundException("The Fleet_File settings key was not found or had no value."));
             }
 
             // Get the data from the file
             var rawData = this.fileIOService.ReadFile(filePath);
 
             // Map to the return type
-            var hw_Message = this.HW_Mapper.StringToHW_Message(rawData);
+//            var hw_Message = this.HW_Mapper.StringToHW_Message(rawData);
 
-            return hw_Message;
+            return rawData;
         }
 
         //public void Save_Fleet_File()

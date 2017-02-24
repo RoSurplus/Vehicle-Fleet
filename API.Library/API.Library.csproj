@@ -115,21 +115,12 @@
     <Compile Include="APIWrappers\APIWrappers.cs" />
     <Compile Include="Common\Common.cs" />
     <Compile Include="Models\ErrorResponseContent.cs" />
-    <Compile Include="Services\ConfigAppSettings.cs" />
     <Compile Include="Services\TestLogger.cs" />
     <Compile Include="Services\ConsoleLogger.cs" />
     <Compile Include="Services\ILogger.cs" />
-    <Compile Include="Services\JsonL4NLogger.cs">
-      <ExcludeFromStyleCop>False</ExcludeFromStyleCop>
-    </Compile>
-    <Compile Include="Services\ServerHostingEnvironmentService.cs" />
-    <Compile Include="Services\IHostingEnvironmentService.cs" />
-    <Compile Include="Services\IAppSettings.cs" />
-    <Compile Include="Services\IFileIOService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
     </Compile>
-    <Compile Include="Services\TextFileIOService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Data\Fleet_File.xml">

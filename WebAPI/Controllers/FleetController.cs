@@ -25,47 +25,62 @@ using System.Net;
 using API.Library.APIAttributes;
 using API.Library.APIWrappers;
 using API.Library.APIMappers;
+using API.Library.Services;
+//  using System.Web.Http;
 
 namespace SampleApp.Controllers
 {
+    /// <summary>
+    ///     Fleet controller for managing the Fleet_File
+    /// </summary>
+    [WebApiExceptionFilter]
     public class FleetController : Controller
     {
         /// <summary>
         ///     The data service
         /// </summary>
-        private readonly IDataService dataService;
+//        private readonly IDataService dataService;
+        private IDataService dataService;
 
-        ///// <summary>
-        /////     The application settings service
-        ///// </summary>
-        //private readonly IAppSettings appSettings;
+        /// <summary>
+        ///     The application settings service
+        /// </summary>
+//        private readonly IAppSettings appSettings;
+        private IAppSettings appSettings;
 
-        ///// <summary>
-        /////     The DateTime wrapper
-        ///// </summary>
-        //private readonly IDateTime dateTimeWrapper;
+        /// <summary>
+        ///     The DateTime wrapper
+        /// </summary>
+//        private readonly IDateTime dateTimeWrapper;
+        private IDateTime dateTimeWrapper;
 
-        ///// <summary>
-        /////     The File IO service
-        ///// </summary>
-        //private readonly IFileIOService fileIOService;
+        /// <summary>
+        ///     The File IO service
+        /// </summary>
+//        private readonly IFileIOService fileIOService;
+        private IFileIOService fileIOService;
 
-        ///// <summary>
-        /////     The Mapper
-        ///// </summary>
-        //private readonly IHW_Mapper HW_Mapper;
+        /// <summary>
+        ///     The Mapper
+        /// </summary>
+//        private readonly IHW_Mapper HW_Mapper;
+        private IHW_Mapper HW_Mapper;
 
         public FleetController()
         {
             this.dataService = null;
-//            this.dataService = new HW_DataService(new AppSettings(), new IDateTime(), new IFileIOService(), IHW_Mapper);
+            appSettings = new ConfigAppSettings();
+            fileIOService = new TextFileIOService(new ServerHostingEnvironmentService());
+            dateTimeWrapper = new SystemDateTime();
+            HW_Mapper = new HW_Mapper();
+
+            this.dataService = new HW_DataService(appSettings, dateTimeWrapper, fileIOService, HW_Mapper);
         }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="SampleAppController" /> class.
         /// </summary>
         /// <param name="dataService">The injected data service</param>
-//        public HW_MessageController(IDataService dataService)
         public FleetController(IDataService dataService)
         {
             this.dataService = dataService;
@@ -87,11 +102,11 @@ namespace SampleApp.Controllers
 
         [WebApiExceptionFilter(Type = typeof(IOException), Status = HttpStatusCode.ServiceUnavailable, Severity = SeverityCode.Error)]
         [WebApiExceptionFilter(Type = typeof(SettingsPropertyNotFoundException), Status = HttpStatusCode.ServiceUnavailable, Severity = SeverityCode.Error)]
-        public String HW_Load_Fleet_File()
+        public String Fleet_File_Load()
         {
             string ret = null;
 
-            ret = this.dataService.HW_Load_Fleet_File();
+            ret = this.dataService.GetFleet_File();
             return ret;
         }
 
@@ -116,11 +131,16 @@ namespace SampleApp.Controllers
         public Fleet Load_Fleet_File()
         {
             session_fleet_file_invalid = false;
+            String text = null;
 
-            var filePath = ConfigurationManager.AppSettings.Get(AppSettingsKeys.Fleet_File);
-            var iFileIO = new TextFileIOService(new ServerHostingEnvironmentService());
-            String text = iFileIO.ReadFile(filePath);
-            // var text = HW_Load_Fleet_File();
+            //if (dataService == null)
+            //{
+            //    var filePath = ConfigurationManager.AppSettings.Get(AppSettingsKeys.Fleet_File);
+            //    var iFileIO = new TextFileIOService(new ServerHostingEnvironmentService());
+            //    text = iFileIO.ReadFile(filePath);
+            //}
+            //else
+                text = this.dataService.GetFleet_File();
 
             return Common.FromXml<Fleet>(text);
         }
@@ -129,17 +149,20 @@ namespace SampleApp.Controllers
         {
             if (session_fleet_file_invalid)
             {
-                var filePath = ConfigurationManager.AppSettings.Get(AppSettingsKeys.Fleet_File);
+                if (dataService == null)
+                {
+                    var filePath = ConfigurationManager.AppSettings.Get(AppSettingsKeys.Fleet_File);
 
-                var iFileIO = new TextFileIOService(new ServerHostingEnvironmentService());
-                iFileIO.WriteFile(filePath, Common.ToXML(session_fleet));
+                    var iFileIO = new TextFileIOService(new ServerHostingEnvironmentService());
+                    iFileIO.WriteFile(filePath, Common.ToXML(session_fleet));
+                }
+                else
+                {
+
+                    this.dataService.PutFleet_File(Common.ToXML(session_fleet));
+                }
             }
         }
-
-        //public int CheckSum()
-        //{
-        //    return session_fleet.CheckSum();
-        //}
 
         // GET: Fleet
         public ActionResult Index()

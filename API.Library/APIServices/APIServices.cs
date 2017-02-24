@@ -85,7 +85,13 @@ namespace API.Library.APIServices
         ///     Get the serialized Fleet_File
         /// </summary>
         /// <returns>A serialized Fleet_File</returns>
-        string HW_Load_Fleet_File();
+        string GetFleet_File();
+
+        /// <summary>
+        ///     Put the serialized Fleet_File
+        /// </summary>
+        /// <returns></returns>
+        void PutFleet_File(string data);
     }
 
     /// <summary>
@@ -392,7 +398,7 @@ namespace API.Library.APIServices
         ///     The Fleet File data
         /// </summary>
         /// <returns>The Text of the Fleet File data</returns>
-        public string HW_Load_Fleet_File()
+        public string GetFleet_File()
         {
             // Get the file path
             var filePath = this.appSettings.Get(AppSettingsKeys.Fleet_File);
@@ -408,22 +414,30 @@ namespace API.Library.APIServices
             // Get the data from the file
             var rawData = this.fileIOService.ReadFile(filePath);
 
-            // Map to the return type
-//            var hw_Message = this.HW_Mapper.StringToHW_Message(rawData);
-
             return rawData;
         }
 
-        //public void Save_Fleet_File()
-        //{
-        //    if (session_fleet_file_invalid)
-        //    {
-        //        var filePath = ConfigurationManager.AppSettings.Get(AppSettingsKeys.Fleet_File);
+        /// <summary>
+        ///     Put Fleet File data
+        /// </summary>
+        /// <returns></returns>
+        public void PutFleet_File(string data)
+        {
+            // Get the file path
+            var filePath = this.appSettings.Get(AppSettingsKeys.Fleet_File);
 
-        //        var iFileIO = new TextFileIOService(new ServerHostingEnvironmentService());
-        //        iFileIO.WriteFile(filePath, Common.ToXML(session_fleet));
-        //    }
-        //}
+            if (string.IsNullOrEmpty(filePath))
+            {
+                // No file path was found, throw exception
+                throw new SettingsPropertyNotFoundException(
+                    ErrorCodes.HW_MessageFileSettingsKeyError,
+                    new SettingsPropertyNotFoundException("The Fleet_File settings key was not found or had no value."));
+            }
+
+            // Get the data from the file
+            var iFileIO = new TextFileIOService(new ServerHostingEnvironmentService());
+            iFileIO.WriteFile(filePath, data);
+        }
     }
 }
 

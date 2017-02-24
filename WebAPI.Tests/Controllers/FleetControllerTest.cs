@@ -136,56 +136,18 @@ namespace SampleApp.Tests.Controllers
         //}
 
         /// <summary>
-        ///     Tests the controller's get method for success
+        ///     Tests the controller's Load_Fleet_File method for success
         /// </summary>
         [Test]
-        public void UnitTestFleetControllerHW_Load_Fleet_FileSuccess()
+        public void UnitTestFleetController_Load_Fleet_FileSuccess()
         {
-            // Create the expected result
-            var expectedResult = GetSampleHW_Message("Hello There5, World!");
-
-            // Set up dependencies
-            this.dataServiceMock.Setup(m => m.GetHW_Message()).Returns(expectedResult);
-
-            // Call the method to test
-            var result = this.controller.Get();
-
-            // Check values
-            Assert.NotNull(result);
-            Assert.AreEqual(result.Data, expectedResult.Data);
-        }
-
-        [Test]
-        public void TestSerialationStabilityX()
-        {
-            // Create the expected result
             var expectedResult = GetSampleFleet_File();
 
             // Set up dependencies
-            this.dataServiceMock.Setup(m => m.HW_Load_Fleet_File()).Returns(expectedResult);
-            //// Act                                                                          
-            //var expectedResult = "Hello There5, World!"; // GetSampleHW_Message("Hello There5, World!");
-
-            //// Set up dependencies
-            //this.dataServiceMock.Setup(m => m.HW_Load_Fleet_File()).Returns(expectedResult);
+            this.dataServiceMock.Setup(m => m.GetFleet_File()).Returns(expectedResult);
 
             // Call the method to test
-            //            var xmlstr = this.controller.HW_Load_Fleet_File();
-            //this.controller.session_fleet = Common.FromXml<Fleet>(result);
-            //this.controller.session_fleet.fix_NextID();
-            //int origchksum = controller.CheckSum();
-
-            //            var result = this.controller.Get();
-
-            //            int origchksum = controller.CheckSum();
-            //controller.Save_Fleet_File();
-            //controller.Load_Fleet_File();
-            //int newchksum = controller.CheckSum();
-
-            // Assert
-            //            Assert.AreEqual(origchksum, newchksum);
-            //            Assert.AreNotEqual(origchksum, 0);
-            var result = this.controller.HW_Load_Fleet_File();
+            var result = this.controller.Fleet_File_Load();
 
             // Check values
             Assert.NotNull(result);
@@ -202,11 +164,11 @@ namespace SampleApp.Tests.Controllers
         //    // free native resources
         //}
 
-      //  public void Dispose()
-      //  {
-      ////      base.Dispose(true);
-      //      GC.SuppressFinalize(this);
-      //  }
+        //  public void Dispose()
+        //  {
+        ////      base.Dispose(true);
+        //      GC.SuppressFinalize(this);
+        //  }
 
         #region Helper Methods
         /// <summary>

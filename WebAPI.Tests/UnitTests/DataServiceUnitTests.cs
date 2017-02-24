@@ -92,7 +92,7 @@ namespace SampleApp.Tests.UnitTests
 //            this.HW_MapperMock.Setup(m => m.StringToHW_Message(FileContents)).Returns(expectedResult);
 
             // Call the method to test
-            var result = this.HW_DataService.HW_Load_Fleet_File();
+            var result = this.HW_DataService.GetFleet_File();
 
             // Check values
             NUnit.Framework.Assert.NotNull(result);
